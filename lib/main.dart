@@ -1,9 +1,10 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:projek_flutter/Menu.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'History.dart';
-
+import 'dart:convert';
+import 'package:http/http.dart';
+import 'package:quickalert/quickalert.dart';
 void main(){  
   
   runApp( MaterialApp(
@@ -20,40 +21,28 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
-  class _SignInForm extends State<SignInform> {
+
   final _formKey = GlobalKey<FormState>();
-  String? ID_Customer;
-  String? Telepon;
-  bool? remember = false;
 
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  bool visible = false;
-  final String sUrl = "https://127.0.0.1:8000/api/";
 
-  @override
-  void initState() {
-    super.initState();
-  }
+  final TextEditingController ID_CustomerController = TextEditingController();
+  final TextEditingController TeleponController = TextEditingController();
+ 
 
-  _cekLogin(String email, password) async {
-    setState(() {
-      visible = true;
-    });
-    final prefs = await SharedPreferences.getInstance();
 
+  _cekLogin(String ID_Customer, Telepon) async {
     try {
       Response response = await post(
           Uri.parse('http://127.0.0.1:8000/api/login'),
-          body: {'email': email, 'password': password});
+          body: {'email': ID_Customer, 'password': Telepon});
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         var data = jsonDecode(response.body.toString());
         print(data);
         print("data sukses");
         Navigator.of(context)
             .push(MaterialPageRoute(
-          builder: (context) => HomeScreens(),
+          builder: (context) => Menu(),
         ))
             .then((value) {
           setState() {}
@@ -63,13 +52,23 @@ class _MyWidgetState extends State<MyWidget> {
           context: context,
           type: QuickAlertType.error,
           title: 'Oops...',
-          text: 'Maaf, Email atau Password yang anda masukkan salah',
+          text: 'Maaf, ID_ Customer atau Telepon yang anda masukkan salah',
         );
-      } else {
-        print("data Errror");
+      } else if(ID_Customer.isEmpty||Telepon.isEmpty){
+        QuickAlert.show(
+          context: context,
+          type: QuickAlertType.error,
+          title: 'Oops...',
+          text: 'Masukan, ID_ Customer atau Telepon anda!!',
+        );
       }
     } catch (e) {
-      print("errror");
+      QuickAlert.show(
+          context: context,
+          type: QuickAlertType.error,
+          title: 'Oops...',
+          text: 'Masukan, ID_ Customer atau Telepon anda!!',
+        );
     }
   }
 
@@ -116,8 +115,9 @@ class _MyWidgetState extends State<MyWidget> {
                   height: 30,
                 ),
                  TextFormField(
+                  controller: ID_CustomerController,
                   decoration:  InputDecoration(
-                     fillColor: Colors.white,
+                    fillColor: Colors.white,
                     filled: true,
                     labelText: 'ID Customer',
                     hintText: 'Masukan Id Kamu',
@@ -131,6 +131,7 @@ class _MyWidgetState extends State<MyWidget> {
                   height: 30,
                 ),
                    TextFormField(
+                    controller: TeleponController,
                   decoration:  InputDecoration(
                     fillColor: Colors.white,
                     filled: true,
@@ -147,30 +148,26 @@ class _MyWidgetState extends State<MyWidget> {
                   child: ElevatedButton(
                     onPressed: (){
                         
-                       Navigator.pushReplacement(context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return Home();
-                          },
-                        )
-                       );
-                      
+                       _cekLogin(ID_CustomerController.text.toString(), TeleponController.text.toString());
                     },
+                    child: Container(
+                      height: 40,
+                      padding: EdgeInsets.all(10.0),
+                     
+                        child: Text('LOGIN',
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                      ),
+
+                      
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4),
                       ),
                     ),
-                    child:  Padding(padding: EdgeInsets.all(10.0),
-                      child: Text('LOGIN',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                
-              
-
                   ),
-                 )
+                 ),
+                 
                 ],
               ),
             ),

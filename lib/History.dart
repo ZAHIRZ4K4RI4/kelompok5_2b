@@ -21,8 +21,8 @@ class _nameState extends State<Home> {
               Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                 Container(
-                  margin: EdgeInsets.fromLTRB(20, 20, 5, 20),
-                child: Image(image: AssetImage('assets/img/logo.jpeg',),
+                  margin: const EdgeInsets.fromLTRB(20, 20, 5, 20),
+                child: const Image(image: AssetImage('assets/img/logo.jpeg',),
                 height: 80,
                 width: 100,
                 ),
@@ -30,13 +30,13 @@ class _nameState extends State<Home> {
               Column(
                 children: [
           
-                  Text("Howheal.sac",
+                  const Text("Howheal.sac",
                   style:  TextStyle(
                     fontSize: 18,
                   ),
                 ),
-                 SizedBox(height: 10,),
-                Text("Make your Shoes Better",
+                 const SizedBox(height: 10,),
+                const Text("Make your Shoes Better",
         
 
                 ),
@@ -45,8 +45,8 @@ class _nameState extends State<Home> {
               ),
               Row(
                 children: [
-                  Image(image: AssetImage('assets/img/bells.jpg',)),
-                   Image(image: AssetImage('assets/img/titik.jpg',)),
+                  const Image(image: AssetImage('assets/img/bells.jpg',)),
+                   const Image(image: AssetImage('assets/img/titik.jpg',)),
                   
                 ],
               ),
@@ -54,27 +54,48 @@ class _nameState extends State<Home> {
               ],),
               Column(
                 children: [
-                  SizedBox(height: 20, ),
-                  Text('Rena Amalia Afifah                   =089676628458 ')
+                  const SizedBox(height: 20, ),
+                  const Text('Zahir                   =0842578671 ')
     
               ],),
-              SizedBox(height:10 ),
+              const SizedBox(height:10 ),
               Container(
-                
-                margin: EdgeInsets.fromLTRB(100, 0,80, 0),
-                padding: EdgeInsets.all(10),
+                margin: const EdgeInsets.fromLTRB(60, 0,60, 0),
+                padding: const EdgeInsets.all(10),
                 color: Colors.green,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
                     ),
-                    Text('Id Pelayanan : PL001',),
-                    SizedBox(height: 5,),
-                    Text('Pelayanan    : Re Colour                     19-11-2022             ',),
-                    SizedBox(height: 5,),
-                    Text('Status       : Belum Selesai                           3 hari              ',),
-                    SizedBox(height: 5,),
+                    const Text('Id Pelayanan : PL001', style:  TextStyle(
+                    fontSize: 12,
+                  ),),
+                    const SizedBox(height: 5),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Pelayanan : Re Colour', style:  TextStyle(
+                        fontSize: 12,
+                  ),), const Text('19-14-2022', style:  TextStyle(
+                        fontSize: 10,
+                  ),),
+                      ],
+                    ),
+                    const SizedBox(height: 5,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Status: Belum Selesi', style:  TextStyle(
+                        fontSize: 12,
+                  ),),
+                  const Text('3 Hari', style:  TextStyle(
+                        fontSize: 10,
+                  ),),
+                      ],
+                    ),
+                    const SizedBox(height: 5,),
+
                     
                     Row(
                       children:[
@@ -86,43 +107,46 @@ class _nameState extends State<Home> {
                   ],
                 ),
               ),
-              SizedBox(height: 40,),
+              const SizedBox(height: 40,),
               
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                  Image(image: AssetImage('assets/img/gpay.png',),),
-                  Image(image:AssetImage('assets/img/store.jpg')),
+                  const Image(image: AssetImage('assets/img/gpay.png',),),
+                  const Image(image:AssetImage('assets/img/store.jpg')),
                   
                 ],),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      color: Colors.grey,
-                      padding: EdgeInsets.all(10),
-                      margin: EdgeInsets.all(50),
-                      child: Row(
-                        children: [
-                          Image(image: AssetImage('assets/img/wa.PNG',)),
-                          SizedBox(width: 10,),
-                          Text('CP: 082132622013'),
-                        ],
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        color: Colors.grey,
+                        padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(20),
+                        child: Row(
+                          children: [
+                            const Image(image: AssetImage('assets/img/wa.PNG',)),
+                            const SizedBox(width: 10,),
+                            const Text('CP: 082132622013'),
+                          ],
+                        ),
                       ),
-                    ),
-                    Container(
-                      color: Colors.grey,
-                      padding: EdgeInsets.all(10),
-                      margin: EdgeInsets.all(30),
-                      child: Row(
-                        children: [
-                          Image(image: AssetImage('assets/img/ig.PNG',)),
-                          SizedBox(width: 5,),
-                          Text('IG:@HOWHEAL.SAC'),
-                        ],
+                      Container(
+                        color: Colors.grey,
+                        padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(30),
+                        child: Row(
+                          children: [
+                            const Image(image: AssetImage('assets/img/ig.PNG',)),
+                            const SizedBox(width: 5,),
+                            const Text('IG:@HOWHEAL.SAC'),
+                          ],
+                        ),
                       ),
-                    ),
-                  ]
+                    ]
+                  ),
                 ),
             ],
 
@@ -136,6 +160,3 @@ class _nameState extends State<Home> {
       );
   }
 }
-
-
-
